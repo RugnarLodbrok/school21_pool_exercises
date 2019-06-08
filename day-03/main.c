@@ -81,8 +81,7 @@ int	main()
 	ft_ultimate_div_mod(&c, &d);
 	printf("div, mod: %d, %d\n", c, d);
 
-	ft_putstr("hello world");
-	ft_putchar('\n');
+	ft_putstr("hello world\n");
 
 	ft_putchar(ft_strlen("ds") + '0');
 	ft_putchar('\n');
@@ -94,7 +93,7 @@ int	main()
 	ft_putstr(ft_strrev(str));
 	ft_putchar('\n');
 
-	printf("atoi: %d\n", ft_atoi("+432tgr"));
+	printf("atoi: %d\n", ft_atoi("432tgr"));
 
 	int int_array[10] = {4, 1, 9, 3, 6, 0, 8, 2, 5, 7};
 	ft_sort_integer_table(int_array, 10);

@@ -18,11 +18,12 @@ void	ft_putstr(char *str)
 	char	c;
 
 	i = 0;
-	while (i++)
+	while (1)
 	{
-		c = *(str + i - 1);
+		c = *(str + i);
 		if (c == '\0')
 			break ;
 		ft_putchar(c);
+		i++;
 	}
 }
