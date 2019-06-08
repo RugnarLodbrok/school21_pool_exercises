@@ -1,0 +1,5 @@
+Credentials cache: API:9078
+        Principal: ksticks@21-SCHOOL.RU
+
+  Issued                Expires               Principal
+Jun  3 17:39:33 2019  Jun  4 03:39:24 2019  krbtgt/21-SCHOOL.RU@21-SCHOOL.RU
