@@ -1,0 +1,18 @@
+[
+	{"keys": ["ctrl+c"], "command": "copy"},
+	{"keys": ["ctrl+v"], "command": "paste"},
+	{"keys": ["ctrl+s"], "command": "save"},
+	{"keys": ["ctrl+f"], "command": "show_panel", "args": {"panel": "find", "reverse": false}},
+    
+	{"keys": ["home"], "command": "move_to", "args": {"to": "bol"}},
+	{"keys": ["end"], "command": "move_to", "args": {"to": "eol"}},
+
+	{"keys": ["shift+end"], "command": "move_to", "args": {"to": "eol", "extend": true}},
+	{"keys": ["shift+home"], "command": "move_to", "args": {"to": "bol", "extend": true }},
+	{"keys": ["ctrl+home"], "command": "move_to", "args": {"to": "bof"}},
+	{"keys": ["ctrl+end"], "command": "move_to", "args": {"to": "eof"}},
+	{"keys": ["ctrl+shift+home"], "command": "move_to", "args": {"to": "bof", "extend": true}},
+	{"keys": ["ctrl+shift+end"], "command": "move_to", "args": {"to": "eof", "extend": true}},
+
+	{"keys": ["ctrl+z"], "command": "undo"}
+]
