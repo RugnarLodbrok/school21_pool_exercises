@@ -1,0 +1,1 @@
+void sastantua(int size);
