@@ -6,7 +6,7 @@
 /*   By: ksticks <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 20:30:23 by ksticks           #+#    #+#             */
-/*   Updated: 2019/06/08 20:30:24 by ksticks          ###   ########.fr       */
+/*   Updated: 2019/06/09 15:27:49 by ksticks          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	sastantua(int size)
 	int i;
 	int center;
 
-	if (size < 0)
+	if (size <= 0)
 		return ;
 	center = calc_w(size - 1);
 	i = 0;
