@@ -36,10 +36,38 @@ char			*ft_strncat(char *dest, char *src, int nb);				// ex17
 unsigned int	ft_strlcat(char *dest, char *src, unsigned int size);	// ex18
 unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size);	// ex19
 void			ft_putnbr_base(int nbr, char *base);					// ex20
+int				ft_atoi_base(char *str, char *base);					// ex21
+void			ft_putstr_non_printable(char *str);						// ex22
+void			*ft_print_memory(void *addr, unsigned int size);		// ex23
+
+typedef struct {
+    char *a;
+    char *b;
+} tStringPair;
+
+tStringPair* new_tStringPair(char *a, char *b)
+{
+	tStringPair* p = malloc(sizeof(tStringPair));
+	p->a = a;
+	p->b = b;
+	return p;
+}
 
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
+}
+
+int	ft_strlen(char *str)
+{
+	int len;
+
+	len = 0;
+	while (*(str + len) != '\0')
+	{
+		len++;
+	}
+	return (len);
 }
 
 int	main()
@@ -60,11 +88,11 @@ int	main()
 	a[3] = "-0";
 	a[4] = "d00t";
 	a[5] = "0043";
-	a[6] = "1000000";
+	a[6] = "-\t1000000";
 	a[7] = "709551615";
 	a[8] = "2147483647";
 	a[9] = "21474836432";
-	a[10] = "+999";
+	a[10] = " +999";
 	a[11] = "-+777";
 	a[12] = "+-888";
 	a[13] = "-t04";
@@ -110,31 +138,45 @@ int	main()
 	printf("\n");
 
 	printf("------EX04------\n");
-	printf("TODO TESTS\n\n");
+	char test_ex04_0[256] = "asdf";
+	char test_ex04_1[256] = "asdf";
+	printf("%s==%s\n", ft_strncpy(test_ex04_0, "uiop", 5), strncpy(test_ex04_1, "uiop", 5));
+	printf("%s==%s\n", ft_strncpy(test_ex04_0, "qwerty", 4), strncpy(test_ex04_1, "qwerty", 4));
+	printf("%s==%s\n", ft_strncpy(test_ex04_0, "z", 1), strncpy(test_ex04_1, "z", 1));
 
 	printf("------EX05------\n");
-	char *haystack[8];
-	char *needle[8];
-	haystack[0] = "aaa";
-	needle[0] = "bbb";
-	haystack[1] = "aaa";
-	needle[1] = "a";
-	haystack[2] = "aaa";
-	needle[2] = "aaaa";
-	haystack[3] = "";
-	needle[3] = "aaa";
-	haystack[4] = "aaa";
-	needle[4] = "";
-	haystack[5] = "abc";
-	needle[5] = "abc";
-	haystack[6] = "";
-	needle[6] = "";
-	haystack[7] = "";
-	needle[7] = "";
+	tStringPair strstr_tests[8];
+	strstr_tests[0].a = "aaa";
+	strstr_tests[0].b = "bbb";
+
+	strstr_tests[1].a = "aaa";
+	strstr_tests[1].b = "a";
+
+	strstr_tests[2].a = "aaa";
+	strstr_tests[2].b = "aaaa";
+
+	strstr_tests[3].a = "";
+	strstr_tests[3].b = "bbb";
+
+	strstr_tests[4].a = "aaa";
+	strstr_tests[4].b = "";
+
+	strstr_tests[5].a = "abc";
+	strstr_tests[5].b = "abc";
+
+	strstr_tests[6].a = "";
+	strstr_tests[6].b = "";
+
+	strstr_tests[7].a = "";
+	strstr_tests[7].b = "";
+
 	i = 0;
 	while (i < 8)
 	{
-		printf("haystack, needle: %s, %s;\tstrstr(),ft_strstr():\t%s %s\n", haystack[i], needle[i], strstr(haystack[i], needle[i]), ft_strstr(haystack[i], needle[i]));
+		printf("haystack, needle: %s, %s;\tstrstr(),ft_strstr():\t%s %s\n",
+			strstr_tests[i].a, strstr_tests[i].b,
+			strstr(strstr_tests[i].a, strstr_tests[i].b),
+			ft_strstr(strstr_tests[i].a, strstr_tests[i].b));
 		i++;
 	}
 	printf("\n");
@@ -172,7 +214,7 @@ int	main()
 	printf("\n");
 
 	printf("------EX010------\n");
-	ft_strcpy(str, "hi there i hate \"c\"; ^E ^e 7e");
+	ft_strcpy(str, "hi there i HATE \"c\"; ^E ^e 7e");
 	printf("%s\t->\t", str);
 	ft_strcapitalize(str);
 	printf("%s\n", str);
@@ -221,22 +263,101 @@ int	main()
 	printf("\n");
 
 	printf("------EX018------\n");
-	ft_strcpy(str, "!!!!!!!!!!!!!!!!!!!!!!!!!");
-	ft_strcpy(str, "abc");
-	printf("str, strlcat():\t\t%s\t%lu\n", str, strlcat(str, "DDD", 10));
-	printf("remainings: %s\n", str + 7);
-	ft_strcpy(str, "!!!!!!!!!!!!!!!!!!!!!!!!!");
-	ft_strcpy(str, "abc");
-	printf("str, ft_strlcat():\t%s\t%d\n", str, ft_strlcat(str, "DDD", 10));
-	printf("remainings: %s\n", str + 7);
-	printf("\n");
+	tStringPair cpy_tests[5];
+	int sizes[5];
+	cpy_tests[0].a = "AAA";
+	cpy_tests[0].b = "BBB";
+	sizes[0] = 9;
 
+	cpy_tests[1].a = "AAAA";
+	cpy_tests[1].b = "BBBB";
+	sizes[1] = 9;
+
+	cpy_tests[2].a = "AAAAA";
+	cpy_tests[2].b = "BBBBB";
+	sizes[2] = 9;
+
+	cpy_tests[3].a = "AAAAAAAA";
+	cpy_tests[3].b = "BBBBBBBB";
+	sizes[3] = 9;
+
+	cpy_tests[4].a = "AAAA";
+	cpy_tests[4].b = "BBBB";
+	sizes[4] = 0;
+
+	char* s1;
+	char* s2;
+	int size;
+
+	for (i = 0; i < 5; ++i)
+	{
+		s1 = cpy_tests[i].a;
+		s2 = cpy_tests[i].b;
+		size = sizes[i];
+
+		ft_strcpy(str, "!!!!!!!!!!!!!!!!!!!!!!!!!");
+		ft_strcpy(str, s1);
+		printf("%s\t+ %s\t= ", s1, s2);
+		printf("%d-%s\tOR ", (int)strlcat(str, s2, size), str);	//todo: print whats after \0
+
+		ft_strcpy(str, "!!!!!!!!!!!!!!!!!!!!!!!!!");
+		ft_strcpy(str, s1);
+		printf("%d-%s\n", ft_strlcat(str, s2, size), str);
+
+	}
 	printf("------EX019------\n");
+	strcpy(str, "..................");
+	printf("ft_strlcpy(): %d, %s\n", ft_strlcpy(str, "abcdefg", 3), str);
 	printf("ft_strlcpy(): %d, %s\n", ft_strlcpy(str, "abcdefg", 3), str);
 	printf("\n");
 
-	printf("------EX019------\n");
+	printf("------EX020------\n");
 	ft_putnbr_base(-2147483648, "01");
 	printf("\n");
+	printf("\n");
+
+	printf("------EX021------\n");
+	tStringPair atoi_base_tests[8];
+	atoi_base_tests[0].a = "";
+	atoi_base_tests[0].b = "";
+
+	atoi_base_tests[1].a = "000";
+	atoi_base_tests[1].b = "0";
+
+	atoi_base_tests[2].a = "100";
+	atoi_base_tests[2].b = "01";
+
+	atoi_base_tests[3].a = "102";
+	atoi_base_tests[3].b = "01";
+
+	atoi_base_tests[4].a = " -101";
+	atoi_base_tests[4].b = "01";
+
+	atoi_base_tests[5].a = "";
+	atoi_base_tests[5].b = "";
+
+	atoi_base_tests[6].a = "";
+	atoi_base_tests[6].b = "";
+
+	atoi_base_tests[7].a = "";
+	atoi_base_tests[7].b = "";
+
+	for (i = 0; i < 8; ++i)
+		printf("a, b: %s\t%s\t atoi:\t%d==%d\n",
+			atoi_base_tests[i].a, atoi_base_tests[i].b,
+			(int)strtol( atoi_base_tests[i].a, 0, ft_strlen(atoi_base_tests[i].b)),
+			ft_atoi_base( atoi_base_tests[i].a, atoi_base_tests[i].b));
+	printf("\n");
+
+	printf("------EX022------\n");
+	ft_putstr_non_printable("abcd1234 \\n==\n, \\r==\r, \\f3==\xf3");
+	printf("\n");
+	printf("\n");
+
+	printf("------EX023------\n");
+	//ft_print_memory("abcdefgfjdsfjldjfg\tldsjgklfd\x00jlgdfjklgjf", 54);
+	ft_print_memory("asdfasdfqwertytyzxcvzxcv\0\0\xff\x7f\x01", 33);
+	printf("\n");
+
 	return 0;
 }
