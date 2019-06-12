@@ -10,38 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_strlcpy2(char *dest, char *src, unsigned int n)
+unsigned int	ft_strlen4(char *str)
 {
-	char			*dst;
-	unsigned int	len;
+	unsigned int len;
 
-	dst = dest;
 	len = 0;
-	while (n)
-	{
-		if (!(*src))
-			break ;
-		*(dst++) = *(src++);
-		n--;
+	while (*(str++))
 		len++;
-	}
-	while (*(src++))
-		len++;
-	*(dst++) = 0;
 	return (len);
 }
 
 unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 {
-	char			*ptr;
+	int				i;
+	char			*p;
 	unsigned int	len;
+	unsigned int	len2;
 
-	ptr = dest;
-	len = 0;
-	while (*ptr)
-	{
-		ptr++;
-		len++;
-	}
-	return (len + ft_strlcpy2(ptr, src, size - len - 1));
+	len = ft_strlen4(dest);
+	len2 = ft_strlen4(src);
+	if (size <= len)
+		return (size + ft_strlen4(src));
+	i = size - len;
+	p = dest + len;
+	while (*src && i-- > 1)
+		*(p++) = *(src++);
+	*p = 0;
+	return (len + len2);
 }

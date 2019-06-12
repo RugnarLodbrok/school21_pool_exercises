@@ -10,22 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+
 unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 {
-	char			*dst;
 	unsigned int	len;
+	int				ended;
 
-	dst = dest;
 	len = 0;
-	while (--size)
+	ended = 0;
+	while (size > 1)
 	{
-		if (!(*src))
+		size--;
+		*dest = *src;
+		if (!*src)
+		{
+			ended = 1;
 			break ;
-		*(dst++) = *(src++);
+		}
+		dest++;
+		src++;
 		len++;
 	}
+	if (size && !ended)
+		*dest = 0;
 	while (*(src++))
 		len++;
-	*(dst++) = 0;
 	return (len);
 }

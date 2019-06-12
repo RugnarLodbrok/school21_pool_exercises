@@ -36,8 +36,13 @@ char	*ft_strcapitalize(char *str)
 	{
 		if (is_alphanum(*ptr))
 		{
-			if (word_start && is_lowercase(*ptr))
-				*ptr += 'A' - 'a';
+			if (word_start)
+			{
+				if (is_lowercase(*ptr))
+					*ptr += 'A' - 'a';
+			}
+			else if (is_uppercase(*ptr))
+				*ptr -= 'A' - 'a';
 			word_start = 0;
 		}
 		else
