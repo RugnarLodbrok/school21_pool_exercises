@@ -1,0 +1,7 @@
+tab	tab	tab
+space space space
+2spaces  2spaces  2spaces
+
+
+newlines
+

@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
+void	ft_putchar(char c);
 
 void	ft_putstr(char *str)
 {
@@ -24,7 +23,7 @@ void	ft_putstr(char *str)
 		c = *(str + i);
 		if (c == '\0')
 			break ;
-		write(1, &c, 1);
+		ft_putchar(c);
 		i++;
 	}
 }
@@ -59,7 +58,6 @@ void	sort(char *items[], int size)
 	while (size--)
 	{
 		i = 0;
-		printf("size: %d\n", size);
 		while (i < size)
 		{
 			if (ft_strcmp(items[i], items[i + 1]) > 0)

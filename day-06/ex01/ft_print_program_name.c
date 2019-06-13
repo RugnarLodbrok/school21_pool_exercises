@@ -12,10 +12,7 @@
 
 #include <unistd.h>
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
+void	ft_putchar(char c);
 
 void	ft_putstr(char *str)
 {
@@ -35,6 +32,8 @@ void	ft_putstr(char *str)
 
 int		main(int argc, char const *argv[])
 {
+	if (!argc)
+		return (1);
 	ft_putstr((char*)(argv[0]));
 	ft_putchar('\n');
 	return (0);
