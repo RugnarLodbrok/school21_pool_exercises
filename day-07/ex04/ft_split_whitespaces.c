@@ -51,15 +51,15 @@ char			*dup_until_whitespace(char **str)
 	char			*ptr;
 	unsigned int	i;
 
-	while (is_space(**str))
+	while (**str && is_space(**str))
 		(*str)++;
 	ptr = *str;
 	i = 0;
-	while (!is_space(*ptr++))
+	while (*ptr && !is_space(*ptr++))
 		i++;
 	ret = (char*)malloc(sizeof(char) * (i + 1));
 	ptr = ret;
-	while (!is_space(**str))
+	while (**str && !is_space(**str))
 		*ptr++ = *(*str)++;
 	*ptr = 0;
 	return (ret);
