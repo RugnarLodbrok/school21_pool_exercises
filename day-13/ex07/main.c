@@ -62,11 +62,12 @@ int	main()
 	tree = 0;
 	btree_insert_int(&tree, 5, &cmpf);
 	btree_insert_int(&tree, 4, &cmpf);
-	/*btree_insert_int(&tree, 2, &cmpf);
+	btree_insert_int(&tree, 2, &cmpf);
 	btree_insert_int(&tree, 6, &cmpf);
 	btree_insert_int(&tree, 3, &cmpf);
-	btree_insert_int(&tree, 1, &cmpf);*/
-	//print_t(tree);
+	btree_insert_int(&tree, 1, &cmpf);
+	if (tree)
+		print_t(tree);
 	printf("prefix: ");
 	btree_apply_prefix(tree, &print_item);
 	printf("\ninfix: ");
