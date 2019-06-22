@@ -9,6 +9,7 @@ void print_ll(t_list *ll)
 		printf("[%s]->", ll->str);
 		ll = ll->next;
 	}
+	printf("\n");
 }
 
 t_list	*ft_create_elem(char *data)
