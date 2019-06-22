@@ -4,6 +4,7 @@
 #include "ft_list.h"
 #include "ops.h"
 #include "main.h"
+#include "tokens.h"
 
 typedef struct	s_opp
 {
@@ -20,56 +21,15 @@ t_opp g_opptab[] =
 	{"%", &ft_mod}
 };
 
-char *skip_par_block(char *str)
-{
-	int n;
-	
-	n = 0;
-	while (*str)
-	{
-		if (*str == '(')
-			n++;
-		if (*str == ')')
-			n--;
-		str++;
-		if (!n)
-			break ;
-	}
-	return (str);
-}
-
-char *get_token(char **str)
-{
-	char *ret;
-	char *ptr;
-	
-	skip_spaces(str);
-	ptr = *str;
-	if (!ptr)
-		return (0);
-	ptr = *str;
-	if (*ptr == '(')
-		ptr = skip_par_block(ptr);
-	else
-		skip_non_spaces(&ptr);
-	
-	
-	ret = malloc(sizeof(char) * (ptr - *str + 1));
-	ft_strlcpy(ret, *str, (ptr - *str + 1));
-	*str = ptr;
-	return (ret);
-}
-
 int eval_operand(char *str)
 {
-	//char expr[ft_strlen(str) - 2];
+	char expr[ft_strlen(str) - 1];
 	
 	if (*str == '(')
 	{
-		//ft_strlcpy(expr, str + 1, ft_strlen(str) - 2);
-		//printf("recur eval: `%s`\n, expr");
-		return 0;
-		//return eval(expr);
+		ft_strlcpy(expr, str + 1, ft_strlen(str) - 1);
+		//todo: modify str inplace as it will be used only once
+		return eval(expr);
 	}
 	else
 		return (ft_atoi(str));
@@ -115,7 +75,12 @@ int eval_op(char *str, int a, int b)
 
 int is_hp(char *str)
 {
-	str++;//TODO
+	if (!ft_strcmp(str, "*"))
+		return (1);
+	if (!ft_strcmp(str, "/"))
+		return (1);
+	if (!ft_strcmp(str, "%"))
+		return (1);
 	return (0);
 }
 
@@ -151,6 +116,7 @@ int eval(char *str)
 	}
 	print_ll(n);
 	eval_operands(n);
+	eval_ops(n, 1);
 	eval_ops(n, 0);
 	print_ll(n);
 	return (n->value);
@@ -160,7 +126,8 @@ int main()
 {
 	char *expr;
 	
-	expr = "1 + 2 - (3 - 2)";
+	//expr = "1 + 2 - (3 - 2)";
+	expr = "2 + 2 * 2";
 	printf("\nEVAL: `%s`\n", expr);
 	printf(" = %d\n", eval(expr));
 	return (0);
