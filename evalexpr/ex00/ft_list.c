@@ -52,3 +52,12 @@ int		ft_list_size(t_list *begin_list)
 	}
 	return (len);
 }
+
+void	ft_list_delete_next(t_list *node)
+{
+	t_list *next2;
+	
+	next2 = node->next->next;
+	free(node->next);
+	node->next = next2;
+}

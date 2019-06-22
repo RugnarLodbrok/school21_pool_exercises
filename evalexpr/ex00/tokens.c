@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "utils.h"
+#include "str_utils.h"
 
 char *skip_par_block(char *str)
 {
