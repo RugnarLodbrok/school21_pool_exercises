@@ -19,6 +19,8 @@ char	*skip_par_block(char *str)
 	int n;
 
 	n = 0;
+	if (*str == '-')
+		str++;
 	while (*str)
 	{
 		if (*str == '(')
@@ -32,7 +34,20 @@ char	*skip_par_block(char *str)
 	return (str);
 }
 
-char	*get_token(char **str)
+char	*skip_operand_token(char *str)
+{
+	str++;
+	while (*str >= '0' && *str <= '9')
+		str++;
+	return (str);
+}
+
+char	*skip_operator_token(char *str)
+{
+	return (str + 1);
+}
+
+char	*get_token(char **str, int *even)
 {
 	char *ret;
 	char *ptr;
@@ -42,12 +57,15 @@ char	*get_token(char **str)
 	if (!ptr)
 		return (0);
 	ptr = *str;
-	if (*ptr == '(')
+	if (*ptr == '(' || (*ptr == '-' && *(ptr + 1) == '('))
 		ptr = skip_par_block(ptr);
+	else if (*even)
+		ptr = skip_operator_token(ptr);
 	else
-		skip_non_spaces(&ptr);
+		ptr = skip_operand_token(ptr);
 	ret = malloc(sizeof(char) * (ptr - *str + 1));
 	ft_strlcpy(ret, *str, (ptr - *str + 1));
 	*str = ptr;
+	*even = !*even;
 	return (ret);
 }

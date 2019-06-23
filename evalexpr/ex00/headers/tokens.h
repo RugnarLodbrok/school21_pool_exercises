@@ -14,6 +14,6 @@
 
 # define TOKENS_H
 
-char	*get_token(char **str);
+char	*get_token(char **str, int *even);
 
 #endif

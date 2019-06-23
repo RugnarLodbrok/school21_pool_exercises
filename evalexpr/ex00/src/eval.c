@@ -22,6 +22,11 @@ int		eval_operand(char *str)
 {
 	char expr[ft_strlen(str) - 1];
 
+	if (*str == '-' && *(str + 1) == '(')
+	{
+		ft_strlcpy(expr, str + 2, ft_strlen(str) - 2);
+		return (-eval_expr(expr));
+	}
 	if (*str == '(')
 	{
 		ft_strlcpy(expr, str + 1, ft_strlen(str) - 1);
@@ -47,11 +52,13 @@ int		eval_expr(char *str)
 	t_list	*n;
 	char	*token;
 	int		ret;
+	int		even;
 
 	n = 0;
+	even = 0;
 	while (*str)
 	{
-		token = get_token(&str);
+		token = get_token(&str, &even);
 		if (token)
 			ft_list_push_back(&n, token);
 		else
