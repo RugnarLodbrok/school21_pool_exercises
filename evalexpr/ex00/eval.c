@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   eval.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ksticks <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/23 13:22:19 by ksticks           #+#    #+#             */
+/*   Updated: 2019/06/23 13:22:21 by ksticks          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "ft_list.h"
 #include "str_utils.h"
@@ -6,21 +18,20 @@
 #include "operator.h"
 #include "eval.h"
 
-int eval_operand(char *str)
+int		eval_operand(char *str)
 {
 	char expr[ft_strlen(str) - 1];
-	
+
 	if (*str == '(')
 	{
 		ft_strlcpy(expr, str + 1, ft_strlen(str) - 1);
-		//todo: modify str inplace as it will be used only once
-		return eval_expr(expr);
+		return (eval_expr(expr));
 	}
 	else
 		return (ft_atoi(str));
 }
 
-void eval_operands(t_list *n)
+void	eval_operands(t_list *n)
 {
 	while (n)
 	{
@@ -31,12 +42,12 @@ void eval_operands(t_list *n)
 	}
 }
 
-int eval_expr(char *str)
+int		eval_expr(char *str)
 {
-	t_list *n;
-	char *token;
-	int ret;
-	
+	t_list	*n;
+	char	*token;
+	int		ret;
+
 	n = 0;
 	while (*str)
 	{
@@ -44,7 +55,7 @@ int eval_expr(char *str)
 		if (token)
 			ft_list_push_back(&n, token);
 		else
-			break;
+			break ;
 	}
 	eval_operands(n);
 	eval_ops(n, 1);

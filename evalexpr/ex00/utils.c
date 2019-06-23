@@ -1,23 +1,35 @@
-int is_space(char c)
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ksticks <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/23 13:28:20 by ksticks           #+#    #+#             */
+/*   Updated: 2019/06/23 13:28:21 by ksticks          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int		is_space(char c)
 {
 	if (c == ' ' || (c >= 9 && c <= 13))
 		return (1);
 	return (0);
 }
 
-void skip_spaces(char **str)
+void	skip_spaces(char **str)
 {
 	while (**str && is_space(**str))
 		(*str)++;
 }
 
-void skip_non_spaces(char **str)
+void	skip_non_spaces(char **str)
 {
 	while (**str && !is_space(**str))
 		(*str)++;
 }
 
-int	ft_atoi(char *str)
+int		ft_atoi(char *str)
 {
 	int v;
 	int is_positive;

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_list.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ksticks <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/23 13:26:10 by ksticks           #+#    #+#             */
+/*   Updated: 2019/06/23 13:26:11 by ksticks          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "io.h"
 #include "ft_list.h"
 
-void print_ll(t_list *ll)
+void	print_ll(t_list *ll)
 {
 	while (ll)
 	{
@@ -58,7 +70,7 @@ int		ft_list_size(t_list *begin_list)
 void	ft_list_delete_next(t_list *node)
 {
 	t_list *next2;
-	
+
 	next2 = node->next->next;
 	free(node->next);
 	node->next = next2;

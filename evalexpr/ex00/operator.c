@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operator.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ksticks <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/23 13:29:02 by ksticks           #+#    #+#             */
+/*   Updated: 2019/06/23 13:29:03 by ksticks          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "str_utils.h"
 #include "ft_list.h"
 #include "operator.h"
 
-t_opp g_opptab[] =
+t_opp	g_opptab[] =
 {
 	{"-", &ft_sub},
 	{"+", &ft_add},
@@ -30,7 +42,7 @@ void	*resolve_operator(char *str)
 	return (f);
 }
 
-int is_hp(char *str)
+int		is_hp(char *str)
 {
 	if (!ft_strcmp(str, "*"))
 		return (1);
@@ -41,18 +53,19 @@ int is_hp(char *str)
 	return (0);
 }
 
-int eval_op(char *str, int a, int b)
+int		eval_op(char *str, int a, int b)
 {
 	int ret;
 	int (*op)(int, int);
+
 	op = resolve_operator(str);
 	ret = op(a, b);
 	return (ret);
 }
 
-void eval_ops(t_list *n, int hp)
+void	eval_ops(t_list *n, int hp)
 {
-	while(n->next)
+	while (n->next)
 	{
 		if (!hp || is_hp(n->next->str))
 		{
