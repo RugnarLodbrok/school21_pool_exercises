@@ -14,6 +14,7 @@
 #include "str_utils.h"
 #include "ft_list.h"
 #include "operator.h"
+#include "ops.h"
 
 t_opp	g_opptab[] =
 {
