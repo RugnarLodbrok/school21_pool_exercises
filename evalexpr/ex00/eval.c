@@ -14,7 +14,7 @@ int eval_operand(char *str)
 	{
 		ft_strlcpy(expr, str + 1, ft_strlen(str) - 1);
 		//todo: modify str inplace as it will be used only once
-		return eval(expr);
+		return eval_expr(expr);
 	}
 	else
 		return (ft_atoi(str));
@@ -31,7 +31,7 @@ void eval_operands(t_list *n)
 	}
 }
 
-int eval(char *str)
+int eval_expr(char *str)
 {
 	t_list *n;
 	char *token;
@@ -46,11 +46,9 @@ int eval(char *str)
 		else
 			break;
 	}
-	print_ll(n);
 	eval_operands(n);
 	eval_ops(n, 1);
 	eval_ops(n, 0);
-	print_ll(n);
 	ret = n->value;
 	free(n->str);
 	free(n);

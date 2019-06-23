@@ -1,15 +1,12 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "io.h"
 #include "eval.h"
 
-
-int main()
+int main(int ac, char **av)
 {
-	char *expr;
-	
-	//expr = "1 + 2 - (3 - 2)";
-	expr = "(1 + (3 - 2)) + 2 * 2";
-	printf("\nEVAL: `%s`\n", expr);
-	printf(" = %d\n", eval(expr));
+	if (ac > 1)
+	{
+		ft_putnbr(eval_expr(av[1]));
+		ft_putchar('\n');
+	}
 	return (0);
 }

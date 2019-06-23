@@ -1,15 +1,17 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include "io.h"
 #include "ft_list.h"
 
 void print_ll(t_list *ll)
 {
 	while (ll)
 	{
-		printf("[%s]->", ll->str);
+		ft_putchar('[');
+		ft_putstr(ll->str);
+		ft_putstr("]->");
 		ll = ll->next;
 	}
-	printf("\n");
+	ft_putchar('\n');
 }
 
 t_list	*ft_create_elem(char *data)
